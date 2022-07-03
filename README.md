@@ -1,6 +1,5 @@
-# To-do_List
+# To-do List
 These are the files for the To-Do List Python project.
-
 
 # All previous versions
 If you want to dig into the full history of the development of this project, have a look at this Google Drive link: Temporarily unavaliable
