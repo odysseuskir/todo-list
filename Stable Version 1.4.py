@@ -1,5 +1,5 @@
 '''
-Authors: Odysseus Kirikopoulos (& help from @Number1#4325)
+Authors: Odysseus Kirikopoulos
 Copyright notice: The following program is protected from the Greek law, act 2121/1993
 (C) ALL RIGHTS RESERVED - ODYSSEUS ABRAHAM KIRIKOPOULOS - 2021
 Version: 1.4 stable
