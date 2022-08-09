@@ -1,39 +1,38 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.5 Stable
+Version: 1.5.1 Stable
 WARNING: The following program was created for educational purposes only
 '''
 
-#Variable
-list_1 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
-list_1_name = "Not defined"
+list_1 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""} #Lists storing the tasks
+list_1_name = "Not defined" #The list's name
 list_2 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
 list_2_name = "Not defined"
 list_3 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
 list_3_name = "Not defined"
-operation = "Not defined"
-list_choosen = "Not defined"
-task_choosen = "Not defined"
+operation = "Not defined" #The selected operation from the user
+list_choosen = "Not defined" #The selected list to complete and operation
+task_choosen = "Not defined" #The selected task to complete and operation
 
 #Startup
 print("Author: Odysseus-Abraham Kirikopoulos")
 print('This script is protected by the GNU Public Lisence 3.0. Refer to source as "Odysseus-Abraham Kirikopoulos" when distributing the software.')
-print("Build Version: 1.5 Stable\n\n\n")
+print("Build Version: 1.5.1 Stable\n\n\n")
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
 print("Select an operation")
 
 #Operations
-while True:
+while True: #Infinete loop
 	
 	print("\n\n1) Create a list\n2) Create a new task\n3) View a list\n4) Delete a task\nTo exit type 0")
 	operation = input("Select an operation: ")
 
 	#Operation: Create a new list
 	if(operation == "1"):
-		if(list_1_name == "Not defined"):
+		if(list_1_name == "Not defined"): #Checking which list is not occupied in order to create a list
 			list_1_name = input("\nName your new list: ")
 			print(list_1_name , "created!")
 		elif(list_2_name == "Not defined"):
@@ -42,20 +41,20 @@ while True:
 		elif(list_3_name == "Not defined"):
 			list_3_name = input("\nName your new list: ")
 			print(list_3_name , "created!")
-		elif(list_1_name and list_2_name and list_3_name != "Not defined"):
+		elif(list_1_name and list_2_name and list_3_name != "Not defined"): #In case there are 3 lists, no more can be created
 			print("Err:MaxListsReached")
 
 	#Operation: Create a new task
 	elif(operation == "2"):
 
-		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n") #The user is choosing a list to create the task
 
-		if(list_choosen == "Not defined"):
+		if(list_choosen == "Not defined"): #If the option is an non-occupied list, an error will return
 			print("\nError: ListNotUsable")
 
-		elif(list_choosen == list_1_name):
+		elif(list_choosen == list_1_name): #Going into the list
 			
-			if(list_1["task1"] == ""):
+			if(list_1["task1"] == ""): #Checking an non-occupied task to create the new one
 				list_1["task1"] = input("\nEnter your task: ")
 				print("Task created successfully!")
 
@@ -118,20 +117,20 @@ while True:
 				list_3["task5"] = input("\nEnter your task: ")
 				print("Task created successfully!")
 
-		else:
+		else: #If the input is not applicable, an error will pop up
 			print("Err:ListNotFound")
 
 
 	#Operation: View list
 	elif(operation == "3"):
-		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n") #User selects list
 
-		if(list_choosen == "Not defined"):
+		if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
 			print("\nError: ListNotUsable")
 			list_choosen = ""
-			 
+			
 
-		elif(list_choosen == list_1_name):
+		elif(list_choosen == list_1_name): #Printing the list
 			print(list_1)
 			 
 
@@ -143,7 +142,7 @@ while True:
 			print(list_3)
 			 
 
-		else:
+		else: #If the input is not applicable, an error will pop up
 			print("Err:ListNotFound")
 			 
 
@@ -152,19 +151,19 @@ while True:
 	elif(operation == "4"):
 		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
 
-		if(list_choosen == "Not defined"):
+		if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
 			print("\nError: ListNotUsable")
 			list_choosen = ""
 			 
 
-		elif(list_choosen == list_1_name):
+		elif(list_choosen == list_1_name): 
 			task_choosen = input(f"\nSelect a task: {list_1}\n")
 
-			if(task_choosen == ""):
+			if(task_choosen == ""): #If option is non-occupied then an error pops up
 				print("Err:TaskNotUsable")
 				 
 
-			elif(task_choosen == list_1["task1"]):
+			elif(task_choosen == list_1["task1"]): #Deleting task
 				list_1["task1"] = ""
 				print("Task has been deleted")
 				 
@@ -189,8 +188,8 @@ while True:
 				print("Task has been deleted")
 				 
 
-			else:
-				print("Err:TaskNotFound")
+			else: #If the input is not applicable, an error will pop up
+				print("Err:TaskNotFound") 
 				 
 
 		elif(list_choosen == list_2_name):
@@ -252,14 +251,14 @@ while True:
 			else:
 				print("Err:TaskNotFound")
 
-		else:
+		else: #If the input is not applicable, an error will pop up
 			print("Err:ListNotFound")
 
-	elif operation == "0":
+	elif operation == "0": #User exiting
 		break
 
 	else:
-		print("Err:InvalidOperation")
+		print("Err:InvalidOperation") #If operation selected isn't applicable an error pops up
 		 
 
 			
