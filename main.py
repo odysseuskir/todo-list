@@ -1,7 +1,7 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.6 Beta
+Version: 1.6 Stable
 WARNING: The following program was created for educational purposes only
 '''
 
@@ -19,7 +19,7 @@ task_choosen = "Not defined" #The selected task to complete and operation
 #Startup
 print("Author: Odysseus-Abraham Kirikopoulos")
 print('This script is protected by the GNU Public Lisence 3.0. Refer to source as "Odysseus-Abraham Kirikopoulos" when distributing the software.')
-print("Build Version: 1.6 Beta\n\n\n")
+print("Build Version: 1.6 Stable\n\n\n")
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
