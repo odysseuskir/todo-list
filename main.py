@@ -1,7 +1,7 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.6.1 Prebuild 2
+Version: 1.6.1 Prebuild 3
 WARNING: The following program was created for educational purposes only
 '''
 
@@ -16,17 +16,17 @@ operation = "Not defined" #The selected operation from the user
 list_choosen = "Not defined" #The selected list to complete an operation
 task_choosen = "Not defined" #The selected task to complete an operation
 
-gnu_pubic_license_v3 = '''
-Copyright (C) 2022 Odysseus-Abraham Kirikopoulos
-This program comes with ABSOLUTELY NO WARRANTY.
-This is free software, and you are welcome to redistribute it
-under certain conditions.
-'''
+gnu_pubic_license_v3 = "Copyright (C) 2022 Odysseus-Abraham Kirikopoulos. This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions." #The GNU Public License 3.0
 
-def list_select():
+def list_select(): #Allows the user to select a list
+
+	global list_choosen
+
 	list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
 
-def task_select():
+def task_select(): #Allows the user to select a task
+
+	global task_choosen
 
 	list_select()
 	
@@ -43,8 +43,8 @@ def task_select():
 		task_choosen = input(f"\nSelect a (sub)task: {list_3}\n")
 
 #Startup
-print(gnu_pubic_license_v3)
-print("Build Version: 1.6.2 Prebuild 1\nBuild under development\n\n\n")
+print(gnu_pubic_license_v3) #Prints the GNU Public License 3.0
+print("Build Version: 1.6.2 Prebuild 3\nBuild under development\n\n\n") #Prints the build version
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
@@ -53,15 +53,15 @@ print("Select an operation")
 #Operations
 while True: #Infinete loop
 	
-	operation_tree = input("\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Rename\n(4) View\nTo exit press 0\n\n")
+	operation_tree = input("\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Rename\n(4) View\nTo exit press 0\n\n") #Asks the user to select an operation
 
 	if operation_tree == "0": #User exiting
 		break
 
-	elif operation_tree == "1":
+	elif operation_tree == "1": #User creating a list or a (sub)task
 		operation = input("\n(1) Create a list\n(2) Create a task\n(3) Create a subtask\n\n")
 
-		#Operation: Create a new list
+		#Create a new list
 		if operation == "1":
 
 			if(list_1_name == "Not defined"): #Checking which list is not occupied in order to create a list
@@ -83,7 +83,7 @@ while True: #Infinete loop
 
 				print("Err:MaxListsReached")
 
-		#Operation: Create a new task
+		#Create a new task
 		elif operation == "2":
 
 			list_select()
@@ -125,10 +125,9 @@ while True: #Infinete loop
 				list_choosen[task_choosen][3] = input("\nEnter your task: ")
 				print("Task created successfully!")
 
-	if operation_tree == "2":
+	if operation_tree == "2": #User deleting/checking off a list or a (sub)task
 
 		operation = input("\n(1) Check off a task\n(2) Check off a subtask\n(3) Delete a list\n(4) Delete a task\n\n")
-
 
 		#Chech off a task
 		if operation == "1":
@@ -175,7 +174,7 @@ while True: #Infinete loop
 				list_3_name = "Not defined"
 				list_3 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
 
-		#Operation: Delete a task
+		#Delete a task
 		if operation == "4" :
 				
 				task_select()
@@ -185,7 +184,7 @@ while True: #Infinete loop
 				list_choosen[task_choosen][2] = ""
 				list_choosen[task_choosen][3] = ""					
 
-	if operation_tree == "3":
+	if operation_tree == "3": #User editing a list or a task
 
 		operation = input("\n(1) Rename a list\n(2) Rename a task\n\n")
 		
@@ -210,8 +209,7 @@ while True: #Infinete loop
 
 			list_choosen[task_choosen][0] = input(f"Rename the task: ")					
 
-	#Operation: View list
-	if operation_tree == "4":
+	if operation_tree == "4": #User viewing a list
 		
 		list_select()
 
@@ -224,4 +222,7 @@ while True: #Infinete loop
 		elif(list_choosen == list_3_name):
 			print(list_3)
 			
-exit_key = input("\nTo exit, press Enter\n")
+exit_key = input("\nTo exit, press Enter\n") #Exiting the program
+
+
+#This program is protected by the GNU General Public License v3.0 | ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | SOME RIGHTS RESERVED
