@@ -1,7 +1,7 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.6.1 Prebuild 3
+Version: 1.6.1 Prebuild 4
 WARNING: The following program was created for educational purposes only
 '''
 
@@ -16,13 +16,20 @@ operation = "Not defined" #The selected operation from the user
 list_choosen = "Not defined" #The selected list to complete an operation
 task_choosen = "Not defined" #The selected task to complete an operation
 
-gnu_pubic_license_v3 = "Copyright (C) 2022 Odysseus-Abraham Kirikopoulos. This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions." #The GNU Public License 3.0
-
 def list_select(): #Allows the user to select a list
 
 	global list_choosen
 
-	list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+	list_choosen = str(input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n"))
+
+	if list_choosen == list_1_name:
+		list_choosen = list_1
+	
+	elif list_choosen == list_2_name:
+		list_choosen = list_2
+
+	elif list_choosen == list_3_name:
+		list_choosen = list_3
 
 def task_select(): #Allows the user to select a task
 
@@ -43,12 +50,11 @@ def task_select(): #Allows the user to select a task
 		task_choosen = input(f"\nSelect a (sub)task: {list_3}\n")
 
 #Startup
-print(gnu_pubic_license_v3) #Prints the GNU Public License 3.0
-print("Build Version: 1.6.2 Prebuild 3\nBuild under development\n\n\n") #Prints the build version
+print("To-Do List Copyright (C) 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.") #Prints the GNU Public License 3.0
+print("Build Version: 1.6.1 Prebuild 4\nBuild under development\n\n\n") #Prints the build version
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
-print("Select an operation")
 
 #Operations
 while True: #Infinete loop
@@ -213,13 +219,13 @@ while True: #Infinete loop
 		
 		list_select()
 
-		if(list_choosen == list_1_name): #Printing the list
+		if list_choosen == list_1: #Printing the list
 			print(list_1)
 				
-		elif(list_choosen == list_2_name):
+		elif list_choosen == list_2:
 			print(list_2)
 
-		elif(list_choosen == list_3_name):
+		elif list_choosen == list_3:
 			print(list_3)
 			
 exit_key = input("\nTo exit, press Enter\n") #Exiting the program
