@@ -1,8 +1,7 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.6 Stable
-WARNING: The following program was created for educational purposes only
+Version: 1.6.1 Stable
 '''
 
 list_1 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""], "task4": ["", "", "", ""], "task5": ["", "", "", ""]} #Lists storing the tasks
@@ -13,1112 +12,298 @@ list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", ""
 list_3_name = "Not defined"
 operation_tree = "Not defined" #The selected operation parent from the user (Example: Delete is the parent of delete a task or a list)
 operation = "Not defined" #The selected operation from the user
-list_choosen = "Not defined" #The selected list to complete and operation
-task_choosen = "Not defined" #The selected task to complete and operation
+list_chosen = "Not defined" #The selected list to complete an operation
+task_chosen = "Not defined" #The selected task to complete an operation
+subtask_chosen = 0 #The selected subtask to complete an operation
+
+def refresh_pr_list(): #Refreshes the list of tasks
+
+	global print_task_l1
+	global print_task_l2
+	global print_task_l3
+
+	print_task_l1 = f"\nTask 1: {list_1['task1'][0]}\n -> {list_1['task1'][1]}\n -> {list_1['task1'][2]}\n -> {list_1['task1'][3]}\nTask 2: {list_1['task2'][0]}\n -> {list_1['task2'][1]}\n -> {list_1['task2'][2]}\n -> {list_1['task2'][3]}\nTask 3: {list_1['task3'][0]}\n -> {list_1['task3'][1]}\n -> {list_1['task3'][2]}\n -> {list_1['task3'][3]}\nTask 4: {list_1['task4'][0]}\n -> {list_1['task4'][1]}\n -> {list_1['task4'][2]}\n -> {list_1['task4'][3]}\nTask 5: {list_1['task5'][0]}\n -> {list_1['task5'][1]}\n -> {list_1['task5'][2]}\n -> {list_1['task5'][3]}\n"
+	print_task_l2 = f"\nTask 1: {list_2['task1'][0]}\n -> {list_2['task1'][1]}\n -> {list_2['task1'][2]}\n -> {list_2['task1'][3]}\nTask 2: {list_2['task2'][0]}\n -> {list_2['task2'][1]}\n -> {list_2['task2'][2]}\n -> {list_2['task2'][3]}\nTask 3: {list_2['task3'][0]}\n -> {list_2['task3'][1]}\n -> {list_2['task3'][2]}\n -> {list_2['task3'][3]}\nTask 4: {list_2['task4'][0]}\n -> {list_2['task4'][1]}\n -> {list_2['task4'][2]}\n -> {list_2['task4'][3]}\nTask 5: {list_2['task5'][0]}\n -> {list_2['task5'][1]}\n -> {list_2['task5'][2]}\n -> {list_2['task5'][3]}\n"
+	print_task_l3 = f"\nTask 1: {list_3['task1'][0]}\n -> {list_3['task1'][1]}\n -> {list_3['task1'][2]}\n -> {list_3['task1'][3]}\nTask 2: {list_3['task2'][0]}\n -> {list_3['task2'][1]}\n -> {list_3['task2'][2]}\n -> {list_3['task2'][3]}\nTask 3: {list_3['task3'][0]}\n -> {list_3['task3'][1]}\n -> {list_3['task3'][2]}\n -> {list_3['task3'][3]}\nTask 4: {list_3['task4'][0]}\n -> {list_3['task4'][1]}\n -> {list_3['task4'][2]}\n -> {list_3['task4'][3]}\nTask 5: {list_3['task5'][0]}\n -> {list_3['task5'][1]}\n -> {list_3['task5'][2]}\n -> {list_3['task5'][3]}\n"
+
+
+def list_select(): #Allows the user to select a list
+
+	global list_chosen
+
+	list_chosen = str(input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n"))
+
+	if list_chosen == list_1_name:
+		list_chosen = list_1
+	
+	elif list_chosen == list_2_name:
+		list_chosen = list_2
+
+	elif list_chosen == list_3_name:
+		list_chosen = list_3
+
+	else:
+		print("Err:ListNotFound")
+
+def task_select(): #Allows the user to select a task
+
+	global task_chosen
+
+	list_select()
+	
+	if list_chosen == list_1:
+
+		task_chosen = input(f"\nSelect a task: {print_task_l1}\n")
+	
+	elif list_chosen == list_2:
+
+		task_chosen = input(f"\nSelect a task: {print_task_l2}\n")
+
+	elif list_chosen == list_3:
+
+		task_chosen = input(f"\nSelect a task: {print_task_l3}\n")
+
+	else:
+		print("Err:ListNotFound")
+
+def subtask_select():
+
+	global subtask_chosen
+
+	task_select()
+
+	subtask_chosen = input(f"\nSelect a subtask:\n")
+
+	subtask_chosen = int(subtask_chosen)
 
 #Startup
-print("Author: Odysseus-Abraham Kirikopoulos")
-print('This script is protected by the GNU Public Lisence 3.0. Refer to source as "Odysseus-Abraham Kirikopoulos" when distributing the software.')
-print("Build Version: 1.6 Stable\n\n\n")
+print("To-Do List Copyright (C) 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.") #Prints the GNU Public License 3.0
+print("Build Version: 1.6.1 Stable\n\n") #Prints the build version
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
-print("Select an operation")
 
 #Operations
 while True: #Infinete loop
 	
-	operation_tree = input("\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Rename\n(4) View\nTo exit press 0\n\n")
+	operation_tree = input("\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Rename\n(4) View\nTo exit press 0\n\n") #Asks the user to select an operation
 
 	if operation_tree == "0": #User exiting
 		break
 
-	elif operation_tree == "1":
-		operation = input("\n(1) Create a list\n(2) Create a task\n(3) Create a subtask\n\n")
+	elif operation_tree == "1": #User creating a list or a (sub)task
+		operation = input("\n -> (1) Create a list\n -> (2) Create a task\n(3) -> Create a subtask\n\n")
 
-		#Operation: Create a new list
-		if(operation == "1"):
+		#Create a new list
+		if operation == "1":
+
 			if(list_1_name == "Not defined"): #Checking which list is not occupied in order to create a list
+
 				list_1_name = input("\nName your new list: ")
-				print(list_1_name , "created!")
+				print(f"{list_1_name} created")
+
 			elif(list_2_name == "Not defined"):
+
 				list_2_name = input("\nName your new list: ")
-				print(list_2_name , "created!")
+				print(f"{list_2_name} created")
+
 			elif(list_3_name == "Not defined"):
+
 				list_3_name = input("\nName your new list: ")
-				print(list_3_name , "created!")
+				print(f"{list_3_name} created")
+
 			elif(list_1_name and list_2_name and list_3_name != "Not defined"): #In case there are 3 lists, no more can be created
+
 				print("Err:MaxListsReached")
 
-		#Operation: Create a new task
-		elif(operation == "2"):
+			refresh_pr_list()
 
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n") #The user is choosing a list to create the task
+		#Create a new task
+		elif operation == "2":
 
-			if(list_choosen == "Not defined"): #If the option is an non-occupied list, an error will return
-				print("\nError: ListNotUsable")
+			list_select()
 
-			elif(list_choosen == list_1_name): #Going into the list
-				
-				if(list_1["task1"][0] == ""): #Checking an non-occupied task to create the new one
-					list_1["task1"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+			if list_chosen["task1"][0] == "": #Checking an non-occupied task to create the new one
 
-				elif(list_1["task2"][0] == ""):
-					list_1["task2"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				list_chosen["task1"][0] = input("\nEnter your task: ")
+				print("\nTask created successfully!")
 
-				elif(list_1["task3"][0] == ""):
-					list_1["task3"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+			elif list_chosen["task2"][0] == "":
 
-				elif(list_1["task4"][0] == ""):
-					list_1["task4"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				list_chosen["task2"][0] = input("\nEnter your task: ")
+				print("\nTask created successfully!")
 
-				elif(list_1["task5"][0] == ""):
-					list_1["task5"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
-					
-			elif(list_choosen == list_2_name):
+			elif list_chosen["task3"][0] == "":
 
-				if(list_2["task1"][0] == ""):
-					list_2["task1"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				list_chosen["task3"][0] = input("\nEnter your task: ")
+				print("\nTask created successfully!")
 
-				elif(list_2["task2"][0] == ""):
-					list_2["task2"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+			elif list_chosen["task4"][0] == "":
 
-				elif(list_2["task3"][0] == ""):
-					list_2["task3"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				list_chosen["task4"][0] = input("\nEnter your task: ")
+				print("\nTask created successfully!")
 
-				elif(list_2["task4"][0] == ""):
-					list_2["task4"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+			elif list_chosen["task5"][0] == "":
 
-				elif(list_2["task5"][0] == ""):
-					list_2["task5"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
-			
-			elif(list_choosen == list_3_name):
-				if(list_3["task1"][0] == ""):
-					list_3["task1"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				list_chosen["task5"][0] = input("\nEnter your task: ")
+				print("\nTask created successfully!")
 
-				elif(list_3["task2"][0] == ""):
-					list_3["task2"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+			else:
 
-				elif(list_3["task3"][0] == ""):
-					list_3["task3"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
+				print("\nErr:MaxTasksReached") #In case there are 5 tasks, no more can be created
 
-				elif(list_3["task4"][0] == ""):
-					list_3["task4"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
-
-				elif(list_3["task5"][0] == ""):
-					list_3["task5"][0] = input("\nEnter your task: ")
-					print("Task created successfully!")
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:ListNotFound")
+			refresh_pr_list()
 
 		#Create a subtask
 		elif operation == "3":
 
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n") #The user is choosing a list to create the task
+			task_select()
 
-			if(list_choosen == "Not defined"): #If the option is an non-occupied list, an error will return
-				print("\nError: ListNotUsable")
+			if list_chosen[task_chosen][1] == "": #Checking an non-occupied subtask to create the new one
 
-			elif(list_choosen == list_1_name): #Going into the list
-				
-				task_choosen = input("Select a task: ")
+				list_chosen[task_chosen][1] = input("\nEnter your task: ")
+				print("\nSubtask created successfully!")
 
-				if task_choosen == list_1["task1"][0]:
+			elif list_chosen[task_chosen][2] == "":
 
-					if list_1["task1"][1] == "":
-						list_1["task1"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
+				list_chosen[task_chosen][2] = input("\nEnter your task: ")
+				print("\nSubtask created successfully!")
 
-					elif list_1["task1"][2] == "":
-						list_1["task1"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
+			elif list_chosen[task_chosen][3] == "":
 
-					elif list_1["task1"][3] == "":
-						list_1["task1"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
+				list_chosen[task_chosen][3] = input("\nEnter your task: ")
+				print("\nSubtask created successfully!")
 
-				elif task_choosen == list_1["task2"][0]:
+			else: #In case there are 3 subtasks, no more can be created
 
-					if list_1["task2"][1] == "":
-						list_1["task2"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
+				print("\nErr:MaxSubtasksReached")
 
-					elif list_1["task2"][2] == "":
-						list_1["task2"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
+			refresh_pr_list()
 
-					elif list_1["task2"][3] == "":
-						list_1["task2"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
+	if operation_tree == "2": #User deleting/checking off a list or a (sub)task
 
-				elif task_choosen == list_1["task3"][0]:
+		operation = input("\n -> (1) Check off a task\n -> (2) Check off a subtask\n -> (3) Delete a list\n -> (4) Delete a task\n\n")
 
-					if list_1["task3"][1] == "":
-						list_1["task3"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task3"][2] == "":
-						list_1["task3"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task3"][3] == "":
-						list_1["task3"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_1["task4"][0]:
-
-					if list_1["task4"][1] == "":
-						list_1["task4"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task4"][2] == "":
-						list_1["task4"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task4"][3] == "":
-						list_1["task4"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_1["task5"][0]:
-
-					if list_1["task5"][1] == "":
-						list_1["task5"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task5"][2] == "":
-						list_1["task5"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_1["task2"][3] == "":
-						list_1["task5"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-					
-			elif(list_choosen == list_2_name): #Going into the list
-				
-				task_choosen = input("Select a task: ")
-
-				if task_choosen == list_2["task1"][0]:
-
-					if list_2["task1"][1] == "":
-						list_2["task1"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task1"][2] == "":
-						list_2["task1"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task1"][3] == "":
-						list_2["task1"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_2["task2"][0]:
-
-					if list_2["task2"][1] == "":
-						list_2["task2"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task2"][2] == "":
-						list_2["task2"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task2"][3] == "":
-						list_2["task2"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_2["task3"][0]:
-
-					if list_2["task3"][1] == "":
-						list_2["task3"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task3"][2] == "":
-						list_2["task3"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task3"][3] == "":
-						list_2["task3"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_2["task4"][0]:
-
-					if list_2["task4"][1] == "":
-						list_2["task4"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task4"][2] == "":
-						list_2["task4"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task4"][3] == "":
-						list_2["task4"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_1["task5"][0]:
-
-					if list_2["task5"][1] == "":
-						list_2["task5"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task5"][2] == "":
-						list_2["task5"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_2["task2"][3] == "":
-						list_2["task5"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-			elif(list_choosen == list_3_name): #Going into the list
-				
-				task_choosen = input("Select a task: ")
-
-				if task_choosen == list_3["task1"][0]:
-
-					if list_3["task1"][1] == "":
-						list_3["task1"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task1"][2] == "":
-						list_3["task1"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task1"][3] == "":
-						list_3["task1"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_3["task2"][0]:
-
-					if list_3["task2"][1] == "":
-						list_3["task2"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task2"][2] == "":
-						list_3["task2"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task2"][3] == "":
-						list_3["task2"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_3["task3"][0]:
-
-					if list_3["task3"][1] == "":
-						list_3["task3"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task3"][2] == "":
-						list_3["task3"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task3"][3] == "":
-						list_3["task3"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_3["task4"][0]:
-
-					if list_3["task4"][1] == "":
-						list_3["task4"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task4"][2] == "":
-						list_3["task4"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task4"][3] == "":
-						list_3["task4"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-				elif task_choosen == list_3["task5"][0]:
-
-					if list_3["task5"][1] == "":
-						list_3["task5"][1] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task5"][2] == "":
-						list_3["task5"][2] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-					elif list_3["task2"][3] == "":
-						list_3["task5"][3] = input("\nEnter your task: ")
-						print("Task created successfully!")
-
-	if operation_tree == "2":
-
-		operation = input("\n(1) Check off a task\n(2) Check off a subtask\n(3) Delete a list\n(4) Delete a task\n\n")
-
+		#Chech off a task
 		if operation == "1":
 
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+			task_select()									
 
-			if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
-				print("\nError: ListNotUsable")
-				list_choosen = ""
-				
+			list_chosen[task_chosen][0] += " [Done]" #Adding "[Done]" to the end of the selected task
+			print("Task checked off successfully!")
 
-			elif(list_choosen == list_1_name): 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
+			refresh_pr_list()
 
-				if(task_choosen == ""): #If option is non-occupied then an error pops up
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_1["task1"][0]): #Deleting task
-					list_1["task1"][0] += " [Done]"
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task2"][0]):
-					list_1["task2"][0] += " [Done]"
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task3"][0]):
-					list_1["task3"][0] += " [Done]"
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task4"][0]):
-					list_1["task4"][0] += " [Done]"
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task5"][0]):
-					list_1["task5"][0] += " [Done]"
-					print("Task has been deleted")
-					
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:TaskNotFound") 
-					
-
-			elif(list_choosen == list_2_name):
-				task_choosen = input(f"\nSelect a task: {list_2}\n")
-
-				if(task_choosen == ""):
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_2["task1"][0]):
-					list_2["task1"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task2"][0]):
-					list_2["task2"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task3"][0]):
-					list_2["task3"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task4"][0]):
-					list_2["task4"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task5"][0]):
-					list_2["task5"][0] += " [Done]"
-					print("Task has been deleted")
-
-				else:
-					print("Err:TaskNotFound")
-
-			elif(list_choosen == list_1_name):
-				task_choosen = input(f"\nSelect a task: {list_3}\n")
-
-				if(task_choosen == ""):
-					print("Err:TaskNotUsable")
-
-				elif(task_choosen == list_3["task1"][0]):
-					list_3["task1"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task2"][0]):
-					list_3["task2"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task3"][0]):
-					list_3["task3"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task4"][0]):
-					list_3["task4"][0] += " [Done]"
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task5"][0]):
-					list_3["task5"][0] += " [Done]"
-					print("Task has been deleted")
-
-				else:
-					print("Err:TaskNotFound")
-
-			else: #If the input is not applicable, an error will pop up
-				print("Err:ListNotFound")
-
+		#Check off a subtask
 		if operation == "2":
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
 
-			if list_choosen == list_1_name:
+			subtask_select()
 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
+			list_chosen[task_chosen][subtask_chosen] += " [Done]" #Adding "[Done]" to the end of the selected subtask
+			print("Subtask checked off successfully!")
 
-				if task_choosen == list_1["task1"][0]:
-
-					subtask_choosen = input("\nSelect a subtask: " + list_1["task1"])
-
-					if subtask_choosen == list_1["task1"][1]:
-
-						list_1["task1"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task1"][2]:
-
-						list_1["task1"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task1"][3]:
-
-						list_1["task1"][3] += " [Done]"
-						print("Success")
-
-					else:
-						
-						print("Error")
-
-				if task_choosen == list_1["task2"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_1["task2"])
-
-					if subtask_choosen == list_1["task2"][1]:
-
-						list_1["task2"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task2"][2]:
-
-						list_1["task2"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task2"][3]:
-
-						list_1["task2"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_1["task3"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_1["task3"])
-
-					if subtask_choosen == list_1["task3"][1]:
-
-						list_1["task3"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task3"][2]:
-
-						list_1["task3"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task3"][3]:
-
-						list_1["task3"][3] += " [Done]"
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_1["task4"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_1["task4"])
-
-					if subtask_choosen == list_1["task4"][1]:
-
-						list_1["task4"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][2]:
-
-						list_1["task4"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][3]:
-
-						list_1["task4"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-				
-				if task_choosen == list_1["task5"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_1["task5"])
-
-					if subtask_choosen == list_1["task5"][1]:
-
-						list_1["task5"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][2]:
-
-						list_1["task5"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][3]:
-
-						list_1["task5"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_1["task1"][0]:
-
-					subtask_choosen = input("\nSelect a subtask: " + list_1["task1"])
-
-					if subtask_choosen == list_1["task1"][1]:
-
-						list_1["task1"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task1"][2]:
-
-						list_1["task1"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task1"][3]:
-
-						list_1["task1"][3] += " [Done]"
-						print("Success")
-
-					else:
-						
-						print("Error")
-
-				if task_choosen == list_1["task2"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_1["task2"])
-
-					if subtask_choosen == list_1["task2"][1]:
-
-						list_1["task2"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task2"][2]:
-
-						list_1["task2"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task2"][3]:
-
-						list_1["task2"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_1["task3"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_1["task3"])
-
-					if subtask_choosen == list_1["task3"][1]:
-
-						list_1["task3"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task3"][2]:
-
-						list_1["task3"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task3"][3]:
-
-						list_1["task3"][3] += " [Done]"
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_1["task4"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_1["task4"])
-
-					if subtask_choosen == list_1["task4"][1]:
-
-						list_1["task4"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][2]:
-
-						list_1["task4"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][3]:
-
-						list_1["task4"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-				
-				if task_choosen == list_1["task5"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_1["task5"])
-
-					if subtask_choosen == list_1["task5"][1]:
-
-						list_1["task5"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][2]:
-
-						list_1["task5"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_1["task4"][3]:
-
-						list_1["task5"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-
-
-				if task_choosen == list_3["task1"][0]:
-
-					subtask_choosen = input("\nSelect a subtask: " + list_3["task1"])
-
-					if subtask_choosen == list_3["task1"][1]:
-
-						list_3["task1"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task1"][2]:
-
-						list_3["task1"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task1"][3]:
-
-						list_3["task1"][3] += " [Done]"
-						print("Success")
-
-					else:
-						
-						print("Error")
-
-				if task_choosen == list_3["task2"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_3["task2"])
-
-					if subtask_choosen == list_3["task2"][1]:
-
-						list_2["task2"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task2"][2]:
-
-						list_3["task2"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task2"][3]:
-
-						list_3["task2"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_3["task3"][0]:
-
-					subtask_choosen = input("Select a subtask: " + list_3["task3"])
-
-					if subtask_choosen == list_3["task3"][1]:
-
-						list_3["task3"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task3"][2]:
-
-						list_3["task3"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task3"][3]:
-
-						list_3["task3"][3] += " [Done]"
-
-					else:
-
-						print("Error")
-
-				if task_choosen == list_3["task4"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_3["task4"])
-
-					if subtask_choosen == list_3["task4"][1]:
-
-						list_2["task4"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task4"][2]:
-
-						list_2["task4"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task4"][3]:
-
-						list_2["task4"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
-				
-				if task_choosen == list_3["task5"][0]:
-
-					subtask_choosen = input("Select a subtask " + list_3["task5"])
-
-					if subtask_choosen == list_3["task5"][1]:
-
-						list_3["task5"][1] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task4"][2]:
-
-						list_3["task5"][2] += " [Done]"
-						print("Success")
-
-					elif subtask_choosen == list_3["task4"][3]:
-
-						list_3["task5"][3] += " [Done]"
-						print("Success")
-
-					else:
-
-						print("Error")
+			refresh_pr_list()
 
 		#Delete a list
 		if operation == "3":
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
 
-			if list_choosen == list_1_name:
-				list_1_name = "Not Defined"
-				list_1 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
+			list_select()
 
-			if list_choosen == list_2_name:
-				list_2_name = "Not Defined"
-				list_2 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
+			if list_chosen == list_1:
 
-			if list_choosen == list_3_name:
+				list_1_name = list_2_name #Moving the name of the second list to the first one
+				list_2_name = list_3_name #Moving the name of the third list to the second one
+				list_3_name = "Not defined" #Setting the name of the third list to "Not defined"
+				list_1 = list_2 #Moving the second list to the first one
+				list_2 = list_3	#Moving the third list to the second one
+				list_3 = {"task1":["","","",""],"task2":["","","",""],"task3":["","","",""],"task4":["","","",""],"task5":["","","",""]} #Setting the third list to a default one
+				print("List deleted successfully!")
+
+			elif list_chosen == list_2:
+
+				list_2_name = list_3_name
 				list_3_name = "Not defined"
-				list_3 = {"task1": "", "task2": "", "task3": "", "task4": "", "task5": ""}
+				list_2 = list_3
+				list_3 = {"task1":["","","",""],"task2":["","","",""],"task3":["","","",""],"task4":["","","",""],"task5":["","","",""]}
+				print("List deleted successfully!")
 
-		#Operation: Delete a task
-		if(operation == "4"):
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+			elif list_chosen == list_3:
 
-			if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
-				print("\nError: ListNotUsable")
-				list_choosen = ""
-				
+				list_3_name = "Not defined"
+				list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""], "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
+				print("List deleted successfully!")
 
-			elif(list_choosen == list_1_name): 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
+			else:
 
-				if(task_choosen == ""): #If option is non-occupied then an error pops up
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_1["task1"][0]): #Deleting task
-					list_1["task1"][0] = ""
-					list_1["task1"][1] = ""
-					list_1["task1"][2] = ""
-					list_1["task1"][3] = ""
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task2"][0]):
-					list_1["task2"][0] = ""
-					list_1["task2"][1] = ""
-					list_1["task2"][2] = ""
-					list_1["task2"][3] = ""
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task3"][0]):
-					list_1["task3"][0] = ""
-					list_1["task3"][1] = ""
-					list_1["task3"][2] = ""
-					list_1["task3"][3] = ""
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task4"][0]):
-					list_1["task4"][0] = ""
-					list_1["task4"][1] = ""
-					list_1["task4"][2] = ""
-					list_1["task4"][3] = ""
-					print("Task has been deleted")
-					
-
-				elif(task_choosen == list_1["task5"][0]):
-					list_1["task5"][0] = ""
-					list_1["task5"][1] = ""
-					list_1["task5"][2] = ""
-					list_1["task5"][3] = ""
-					print("Task has been deleted")
-					
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:TaskNotFound") 
-					
-
-			elif(list_choosen == list_2_name):
-				task_choosen = input(f"\nSelect a task: {list_2}\n")
-
-				if(task_choosen == ""):
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_2["task1"][0]):
-					list_2["task1"][0] = ""
-					list_2["task1"][1] = ""
-					list_2["task1"][2] = ""
-					list_2["task1"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task2"][0]):
-					list_2["task2"][0] = ""
-					list_2["task2"][1] = ""
-					list_2["task2"][2] = ""
-					list_2["task2"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task3"][0]):
-					list_2["task3"][0] = ""
-					list_2["task3"][1] = ""
-					list_2["task3"][2] = ""
-					list_2["task3"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task4"][0]):
-					list_2["task4"][0] = ""
-					list_2["task4"][1] = ""
-					list_2["task4"][2] = ""
-					list_2["task4"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_2["task5"][0]):
-					list_2["task5"][0] = ""
-					list_2["task5"][1] = ""
-					list_2["task5"][2] = ""
-					list_2["task5"][3] = ""
-					print("Task has been deleted")
-
-				else:
-					print("Err:TaskNotFound")
-
-			elif(list_choosen == list_1_name):
-				task_choosen = input(f"\nSelect a task: {list_3}\n")
-
-				if(task_choosen == ""):
-					print("Err:TaskNotUsable")
-
-				elif(task_choosen == list_3["task1"][0]):
-					list_3["task1"][0] = ""
-					list_3["task1"][1] = ""
-					list_3["task1"][2] = ""
-					list_3["task1"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task2"][0]):
-					list_3["task2"][0] = ""
-					list_3["task2"][1] = ""
-					list_3["task2"][2] = ""
-					list_3["task2"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task3"][0]):
-					list_3["task3"][0] = ""
-					list_3["task3"][1] = ""
-					list_3["task3"][2] = ""
-					list_3["task3"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task4"][0]):
-					list_3["task4"][0] = ""
-					list_3["task4"][1] = ""
-					list_3["task4"][2] = ""
-					list_3["task4"][3] = ""
-					print("Task has been deleted")
-
-				elif(task_choosen == list_3["task5"][0]):
-					list_3["task5"][0] = ""
-					list_3["task5"][1] = ""
-					list_3["task5"][2] = ""
-					list_3["task5"][3] = ""
-					print("Task has been deleted")
-
-				else:
-					print("Err:TaskNotFound")
-
-			else: #If the input is not applicable, an error will pop up
 				print("Err:ListNotFound")
 
-	if operation_tree == "3":
+			refresh_pr_list()
 
-		operation = input("\n(1) Rename a list\n(2) Rename a task\n\n")
+		#Delete a task
+		if operation == "4" :
+				
+				task_select()
 
+				list_chosen[task_chosen][0] = "" #Setting a task blank
+				list_chosen[task_chosen][1] = ""
+				list_chosen[task_chosen][2] = ""
+				list_chosen[task_chosen][3] = ""		
+
+				refresh_pr_list()
+
+	if operation_tree == "3": #User editing a list or a task
+
+		operation = input("\n -> (1) Rename a list\n -> (2) Rename a task\n\n")
+		
+		#Rename a list
 		if operation == "1":
 
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+			list_select()
 
-			if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
-				print("\nError: ListNotUsable")
-				list_choosen = ""
+			if list_chosen == list_1: #Renaming the list
+				list_1_name = input(f"\nRename the list (previous name: {list_1_name}):\n")
+				print("Renamed the list successfuly!")
 
-			elif(list_choosen == list_1_name): #Printing the list
-				list_1_name = input(f"Name the list (previous name: {list_1_name}): ")
-
-			elif(list_choosen == list_2_name):
-				list_2_name = input(f"Name the list (previous name: {list_2_name}): ")
+			elif list_chosen == list_2:
+				list_2_name = input(f"\nRename the list (previous name: {list_2_name}):\n")
+				print("Renamed the list successfuly!")
 					
+			elif list_chosen == list_3:
+				list_3_name = input(f"\nRename the list (previous name: {list_3_name}):\n")
+				print("Renamed the list successfuly!")
 
-			elif(list_choosen == list_3_name):
-				list_3_name = input(f"Name the list (previous name: {list_3_name}): ")
-					
+			else:
+				print("\nErr:ListNotFound")
 
-			else: #If the input is not applicable, an error will pop up
-				print("Err:ListNotFound")
-
+			refresh_pr_list()
+			
+		#Rename a task
 		if operation == "2":
 			
-			list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n")
+			task_select()
 
-			if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
-				print("\nError: ListNotUsable")
-				list_choosen = ""
+			list_chosen[task_chosen][0] = input(f"Rename the task: ") #Renaming the task
+			print("Renamed the task successfuly!")
+
+			refresh_pr_list()	
+
+	if operation_tree == "4": #User viewing a list
+		
+		list_select()
+
+		if list_chosen == list_1: #Printing the list selected
+			print(print_task_l1)
 				
+		elif list_chosen == list_2:
+			print(print_task_l2)
 
-			elif(list_choosen == list_1_name): 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
+		elif list_chosen == list_3:
+			print(print_task_l3)
 
-				if(task_choosen == ""): #If option is non-occupied then an error pops up
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_1["task1"][0]): #Renaming task
-					list_1["task1"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_1["task2"][0]):
-					list_1["task2"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_1["task3"][0]):
-					list_1["task3"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_1["task4"][0]):
-					list_1["task4"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_1["task5"][0]):
-					list_1["task5"][0] = input("Name the task: ")
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:TaskNotFound") 
-					
-
-			elif(list_choosen == list_2_name): 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
-
-				if(task_choosen == ""): #If option is non-occupied then an error pops up
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_2["task1"][0]): #Renaming task
-					list_2["task1"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_2["task2"][0]):
-					list_2["task2"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_2["task3"][0]):
-					list_2["task3"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_2["task4"][0]):
-					list_2["task4"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_2["task5"][0]):
-					list_2["task5"][0] = input("Name the task: ")
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:TaskNotFound")
-
-			elif(list_choosen == list_3_name): 
-				task_choosen = input(f"\nSelect a task: {list_1}\n")
-
-				if(task_choosen == ""): #If option is non-occupied then an error pops up
-					print("Err:TaskNotUsable")
-					
-
-				elif(task_choosen == list_3["task1"][0]): #Renaming task
-					list_3["task1"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_1["task2"][0]):
-					list_3["task2"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_1["task3"][0]):
-					list_3["task3"][0] = input("Name the task: ")
-
-				elif(task_choosen == list_1["task4"][0]):
-					list_3["task4"][0] = input("Name the task: ")					
-
-				elif(task_choosen == list_1["task5"][0]):
-					list_3["task5"][0] = input("Name the task: ")
-
-				else: #If the input is not applicable, an error will pop up
-					print("Err:TaskNotFound") 
- 
-
-	#Operation: View list
-	if operation_tree == "4":
-		list_choosen = input(f"\nSelect a list\n[{list_1_name}]\n[{list_2_name}]\n[{list_3_name}]\n\n") #User selects list
-
-		if(list_choosen == "Not defined"): #If option is non-occupied then an error pops up
-			print("\nError: ListNotUsable")
-			list_choosen = ""
-			
-
-		elif(list_choosen == list_1_name): #Printing the list
-			print(list_1)
-				
-
-		elif(list_choosen == list_2_name):
-			print(list_2)
-				
-
-		elif(list_choosen == list_3_name):
-			print(list_3)
-				
-
-		else: #If the input is not applicable, an error will pop up
+		else:
 			print("Err:ListNotFound")
 			
-exit_key = input("\nPress enter to exit\n")
+exit_key = input() #Exiting the program
+
+
+#This program is protected by the GNU General Public License v3.0 | ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | SOME RIGHTS RESERVED
