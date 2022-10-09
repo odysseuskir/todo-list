@@ -1,8 +1,7 @@
 '''
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.6.1 Prebuild 5
-WARNING: The following program was created for educational purposes only
+Version: 1.6.1 Stable
 '''
 
 list_1 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""], "task4": ["", "", "", ""], "task5": ["", "", "", ""]} #Lists storing the tasks
@@ -43,6 +42,9 @@ def list_select(): #Allows the user to select a list
 	elif list_chosen == list_3_name:
 		list_chosen = list_3
 
+	else:
+		print("Err:ListNotFound")
+
 def task_select(): #Allows the user to select a task
 
 	global task_chosen
@@ -61,19 +63,22 @@ def task_select(): #Allows the user to select a task
 
 		task_chosen = input(f"\nSelect a task: {print_task_l3}\n")
 
+	else:
+		print("Err:ListNotFound")
+
 def subtask_select():
 
 	global subtask_chosen
 
 	task_select()
 
-	subtask_chosen = input(f"\nSelect a subtask: ")
+	subtask_chosen = input(f"\nSelect a subtask:\n")
 
 	subtask_chosen = int(subtask_chosen)
 
 #Startup
 print("To-Do List Copyright (C) 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.") #Prints the GNU Public License 3.0
-print("Build Version: 1.6.1 Prebuild 5\nBuild under development\n\n\n") #Prints the build version
+print("Build Version: 1.6.1 Stable\n\n") #Prints the build version
 
 #Greet
 print("~~~ MY TO-DO LIST ~~~")
@@ -87,7 +92,7 @@ while True: #Infinete loop
 		break
 
 	elif operation_tree == "1": #User creating a list or a (sub)task
-		operation = input("\n(1) Create a list\n(2) Create a task\n(3) Create a subtask\n\n")
+		operation = input("\n -> (1) Create a list\n -> (2) Create a task\n(3) -> Create a subtask\n\n")
 
 		#Create a new list
 		if operation == "1":
@@ -119,27 +124,33 @@ while True: #Infinete loop
 			list_select()
 
 			if list_chosen["task1"][0] == "": #Checking an non-occupied task to create the new one
+
 				list_chosen["task1"][0] = input("\nEnter your task: ")
-				print("Task created successfully!")
+				print("\nTask created successfully!")
 
-			elif list_chosen["task2"][0] == "" : #Checking an non-occupied task to create the new one
+			elif list_chosen["task2"][0] == "":
+
 				list_chosen["task2"][0] = input("\nEnter your task: ")
-				print("Task created successfully!")
+				print("\nTask created successfully!")
 
-			elif list_chosen["task3"][0] == "" : #Checking an non-occupied task to create the new one
+			elif list_chosen["task3"][0] == "":
+
 				list_chosen["task3"][0] = input("\nEnter your task: ")
-				print("Task created successfully!")
+				print("\nTask created successfully!")
 
-			elif list_chosen["task4"][0] == "" : #Checking an non-occupied task to create the new one
+			elif list_chosen["task4"][0] == "":
+
 				list_chosen["task4"][0] = input("\nEnter your task: ")
-				print("Task created successfully!")
+				print("\nTask created successfully!")
 
-			elif list_chosen["task5"][0] == "" : #Checking an non-occupied task to create the new one
+			elif list_chosen["task5"][0] == "":
+
 				list_chosen["task5"][0] = input("\nEnter your task: ")
-				print("Task created successfully!")
+				print("\nTask created successfully!")
 
 			else:
-				print("Err:MaxTasksReached") #In case there are 5 tasks, no more can be created
+
+				print("\nErr:MaxTasksReached") #In case there are 5 tasks, no more can be created
 
 			refresh_pr_list()
 
@@ -148,31 +159,38 @@ while True: #Infinete loop
 
 			task_select()
 
-			if list_chosen[task_chosen][1] == "":
+			if list_chosen[task_chosen][1] == "": #Checking an non-occupied subtask to create the new one
+
 				list_chosen[task_chosen][1] = input("\nEnter your task: ")
-				print("\nTask created successfully!")
+				print("\nSubtask created successfully!")
 
 			elif list_chosen[task_chosen][2] == "":
+
 				list_chosen[task_chosen][2] = input("\nEnter your task: ")
-				print("\nTask created successfully!")
+				print("\nSubtask created successfully!")
 
 			elif list_chosen[task_chosen][3] == "":
+
 				list_chosen[task_chosen][3] = input("\nEnter your task: ")
-				print("\nTask created successfully!")
+				print("\nSubtask created successfully!")
+
+			else: #In case there are 3 subtasks, no more can be created
+
+				print("\nErr:MaxSubtasksReached")
 
 			refresh_pr_list()
 
 	if operation_tree == "2": #User deleting/checking off a list or a (sub)task
 
-		operation = input("\n(1) Check off a task\n(2) Check off a subtask\n(3) Delete a list\n(4) Delete a task\n\n")
+		operation = input("\n -> (1) Check off a task\n -> (2) Check off a subtask\n -> (3) Delete a list\n -> (4) Delete a task\n\n")
 
 		#Chech off a task
 		if operation == "1":
 
 			task_select()									
 
-			list_chosen[task_chosen][0] += " [Done]"
-			print("Task has been checked off")
+			list_chosen[task_chosen][0] += " [Done]" #Adding "[Done]" to the end of the selected task
+			print("Task checked off successfully!")
 
 			refresh_pr_list()
 
@@ -181,8 +199,8 @@ while True: #Infinete loop
 
 			subtask_select()
 
-			list_chosen[task_chosen][subtask_chosen] += " [Done]"
-			print("Subtask has been checked off")
+			list_chosen[task_chosen][subtask_chosen] += " [Done]" #Adding "[Done]" to the end of the selected subtask
+			print("Subtask checked off successfully!")
 
 			refresh_pr_list()
 
@@ -192,25 +210,32 @@ while True: #Infinete loop
 			list_select()
 
 			if list_chosen == list_1:
-				list_1_name = list_2_name
-				list_2_name = list_3_name
-				list_3_name = "Not defined"
-				list_1 = list_2
-				list_2 = list_3
-				list_3 = {"task1":["","","",""],"task2":["","","",""],"task3":["","","",""],"task4":["","","",""],"task5":["","","",""]}
-				print("List deleted successfully")
+
+				list_1_name = list_2_name #Moving the name of the second list to the first one
+				list_2_name = list_3_name #Moving the name of the third list to the second one
+				list_3_name = "Not defined" #Setting the name of the third list to "Not defined"
+				list_1 = list_2 #Moving the second list to the first one
+				list_2 = list_3	#Moving the third list to the second one
+				list_3 = {"task1":["","","",""],"task2":["","","",""],"task3":["","","",""],"task4":["","","",""],"task5":["","","",""]} #Setting the third list to a default one
+				print("List deleted successfully!")
 
 			elif list_chosen == list_2:
+
 				list_2_name = list_3_name
 				list_3_name = "Not defined"
 				list_2 = list_3
 				list_3 = {"task1":["","","",""],"task2":["","","",""],"task3":["","","",""],"task4":["","","",""],"task5":["","","",""]}
-				print("List deleted successfully")
+				print("List deleted successfully!")
 
 			elif list_chosen == list_3:
+
 				list_3_name = "Not defined"
 				list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""], "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
-				print("List deleted successfully")
+				print("List deleted successfully!")
+
+			else:
+
+				print("Err:ListNotFound")
 
 			refresh_pr_list()
 
@@ -219,30 +244,36 @@ while True: #Infinete loop
 				
 				task_select()
 
-				list_chosen[task_chosen][0] = ""
+				list_chosen[task_chosen][0] = "" #Setting a task blank
 				list_chosen[task_chosen][1] = ""
 				list_chosen[task_chosen][2] = ""
 				list_chosen[task_chosen][3] = ""		
 
-				refresh_pr_list()			
+				refresh_pr_list()
 
 	if operation_tree == "3": #User editing a list or a task
 
-		operation = input("\n(1) Rename a list\n(2) Rename a task\n\n")
+		operation = input("\n -> (1) Rename a list\n -> (2) Rename a task\n\n")
 		
 		#Rename a list
 		if operation == "1":
 
 			list_select()
 
-			if list_chosen == list_1: #Printing the list
-				list_1_name = input(f"Rename the list (previous name: {list_1_name}): ")
+			if list_chosen == list_1: #Renaming the list
+				list_1_name = input(f"\nRename the list (previous name: {list_1_name}):\n")
+				print("Renamed the list successfuly!")
 
 			elif list_chosen == list_2:
-				list_2_name = input(f"Rename the list (previous name: {list_2_name}): ")
+				list_2_name = input(f"\nRename the list (previous name: {list_2_name}):\n")
+				print("Renamed the list successfuly!")
 					
 			elif list_chosen == list_3:
-				list_3_name = input(f"Rename the list (previous name: {list_3_name}): ")
+				list_3_name = input(f"\nRename the list (previous name: {list_3_name}):\n")
+				print("Renamed the list successfuly!")
+
+			else:
+				print("\nErr:ListNotFound")
 
 			refresh_pr_list()
 			
@@ -251,7 +282,8 @@ while True: #Infinete loop
 			
 			task_select()
 
-			list_chosen[task_chosen][0] = input(f"Rename the task: ")				
+			list_chosen[task_chosen][0] = input(f"Rename the task: ") #Renaming the task
+			print("Renamed the task successfuly!")
 
 			refresh_pr_list()	
 
@@ -259,7 +291,7 @@ while True: #Infinete loop
 		
 		list_select()
 
-		if list_chosen == list_1: #Printing the list
+		if list_chosen == list_1: #Printing the list selected
 			print(print_task_l1)
 				
 		elif list_chosen == list_2:
@@ -267,8 +299,11 @@ while True: #Infinete loop
 
 		elif list_chosen == list_3:
 			print(print_task_l3)
+
+		else:
+			print("Err:ListNotFound")
 			
-exit_key = input("\nTo exit, press Enter\n") #Exiting the program
+exit_key = input() #Exiting the program
 
 
 #This program is protected by the GNU General Public License v3.0 | ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | SOME RIGHTS RESERVED
