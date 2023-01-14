@@ -1,23 +1,22 @@
 """
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.7 Pre Build 2
+Version: 1.7 Pre Build 3
 """
 
 list_1 = {"task1": ["", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
           "task5": ["", "", "", "", ""]}  # Lists storing the tasks
-list_1_name = "Not defined"  # The list's name
+list_1_name = None  # The list's name
 list_2 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
           "task5": ["", "", "", "", ""]}
-list_2_name = "Not defined"
+list_2_name = None
 list_3 = {"task1": ["", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
           "task5": ["", "", "", "", ""]}
-list_3_name = "Not defined"
-operation_tree = "Not defined"  # The selected operation parent from the user (Example: Delete is the parent of
-# delete a task or a list)
-operation = "Not defined"  # The selected operation from the user
-list_chosen = "Not defined"  # The selected list to complete an operation
-task_chosen = "Not defined"  # The selected task to complete an operation
+list_3_name = None
+operation_tree = None # The selected operation parent from the user (Example: Delete is the parent of delete a task or a list)
+operation = None  # The selected operation from the user
+list_chosen = None  # The selected list to complete an operation
+task_chosen = None  # The selected task to complete an operation
 subtask_chosen = 0  # The selected subtask to complete an operation
 
 
@@ -84,8 +83,8 @@ def subtask_select():
 
 
 # Startup
-print("To-Do List Copyright (C) 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.")  # Prints the GNU Public License 3.0
-print("Build Version: 1.7 Pre Build 2\n\n")  # Prints the build version
+print("To-Do List GNU General Public License 3.0 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.")  # Prints the GNU Public License 3.0
+print("Build Version: 1.7 Pre Build 3\n\n")  # Prints the build version
 
 # Greet
 print("~~~ MY TO-DO LIST ~~~")
@@ -105,23 +104,23 @@ while True:  # Infinite loop
         # Create a new list
         if operation == "1":
 
-            if list_1_name == "Not defined":  # Checking which list is not occupied in order to create a list
+            if list_1_name == None:  # Checking which list is not occupied in order to create a list
 
                 list_1_name = input("\nName your new list: ")
                 print(f"{list_1_name} created")
 
-            elif list_2_name == "Not defined":
+            elif list_2_name == None:
 
                 list_2_name = input("\nName your new list: ")
                 print(f"{list_2_name} created")
 
-            elif list_3_name == "Not defined":
+            elif list_3_name == None:
 
                 list_3_name = input("\nName your new list: ")
                 print(f"{list_3_name} created")
 
             elif (
-                    list_1_name and list_2_name and list_3_name != "Not defined"):  # In case there are 3 lists, no more can be created
+                    list_1_name and list_2_name and list_3_name != None):  # In case there are 3 lists, no more can be created
 
                 print("Err:MaxListsReached")
 
@@ -231,7 +230,7 @@ while True:  # Infinite loop
 
                 list_1_name = list_2_name  # Moving the name of the second list to the first one
                 list_2_name = list_3_name  # Moving the name of the third list to the second one
-                list_3_name = "Not defined"  # Setting the name of the third list to "Not defined"
+                list_3_name = None  # Setting the name of the third list to None
                 list_1 = list_2  # Moving the second list to the first one
                 list_2 = list_3  # Moving the third list to the second one
                 list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
@@ -242,7 +241,7 @@ while True:  # Infinite loop
             elif list_chosen == list_2:
 
                 list_2_name = list_3_name
-                list_3_name = "Not defined"
+                list_3_name = None
                 list_2 = list_3
                 list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
                           "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
@@ -250,7 +249,7 @@ while True:  # Infinite loop
 
             elif list_chosen == list_3:
 
-                list_3_name = "Not defined"
+                list_3_name = None
                 list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
                           "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
                 print("List deleted successfully!")
