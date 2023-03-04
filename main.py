@@ -1,7 +1,7 @@
 """
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.7 Pre Build 3
+Version: 1.7 Pre Build 4
 """
 
 list_1 = {"task1": ["", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
@@ -26,9 +26,9 @@ def refresh_pr_list():  # Refreshes the list of tasks
     global print_task_l2
     global print_task_l3
 
-    print_task_l1 = f"\nTask 1: {list_1['task1'][0]} | Due to: {list_1['task1'][4]}\n -> {list_1['task1'][1]}\n -> {list_1['task1'][2]}\n -> {list_1['task1'][3]}\nTask 2: {list_1['task2'][0]} | Due to: {list_1['task2'][4]}\n -> {list_1['task2'][1]}\n -> {list_1['task2'][2]}\n -> {list_1['task2'][3]}\nTask 3: {list_1['task3'][0]} | Due to: {list_1['task3'][4]}\n -> {list_1['task3'][1]}\n -> {list_1['task3'][2]}\n -> {list_1['task3'][3]}\nTask 4: {list_1['task4'][0]} | Due to: {list_1['task4'][4]}\n -> {list_1['task4'][1]}\n -> {list_1['task4'][2]}\n -> {list_1['task4'][3]}\nTask 5: {list_1['task5'][0]} | Due to: {list_1['task5'][4]}\n -> {list_1['task5'][1]}\n -> {list_1['task5'][2]}\n -> {list_1['task5'][3]}\n"
-    print_task_l2 = f"\nTask 1: {list_2['task1'][0]} | Due to: {list_2['task1'][4]}\n -> {list_2['task1'][1]}\n -> {list_2['task1'][2]}\n -> {list_2['task1'][3]}\nTask 2: {list_2['task2'][0]} | Due to: {list_2['task2'][4]}\n -> {list_2['task2'][1]}\n -> {list_2['task2'][2]}\n -> {list_2['task2'][3]}\nTask 3: {list_2['task3'][0]} | Due to: {list_2['task3'][4]}\n -> {list_2['task3'][1]}\n -> {list_2['task3'][2]}\n -> {list_2['task3'][3]}\nTask 4: {list_2['task4'][0]} | Due to: {list_2['task4'][4]}\n -> {list_2['task4'][1]}\n -> {list_2['task4'][2]}\n -> {list_2['task4'][3]}\nTask 5: {list_2['task5'][0]} | Due to: {list_2['task5'][4]}\n -> {list_2['task5'][1]}\n -> {list_2['task5'][2]}\n -> {list_2['task5'][3]}\n"
-    print_task_l3 = f"\nTask 1: {list_3['task1'][0]} | Due to: {list_3['task1'][4]}\n -> {list_3['task1'][1]}\n -> {list_3['task1'][2]}\n -> {list_3['task1'][3]}\nTask 2: {list_3['task2'][0]} | Due to: {list_3['task2'][4]}\n -> {list_3['task2'][1]}\n -> {list_3['task2'][2]}\n -> {list_3['task2'][3]}\nTask 3: {list_3['task3'][0]} | Due to: {list_3['task3'][4]}\n -> {list_3['task3'][1]}\n -> {list_3['task3'][2]}\n -> {list_3['task3'][3]}\nTask 4: {list_3['task4'][0]} | Due to: {list_3['task4'][4]}\n -> {list_3['task4'][1]}\n -> {list_3['task4'][2]}\n -> {list_3['task4'][3]}\nTask 5: {list_3['task5'][0]} | Due to: {list_3['task5'][4]}\n -> {list_3['task5'][1]}\n -> {list_3['task5'][2]}\n -> {list_3['task5'][3]}\n"
+    print_task_l1 = f"\nTask 1: {list_1['task1'][0]} | Priority: {list_1['task1'][4]}\n -> {list_1['task1'][1]}\n -> {list_1['task1'][2]}\n -> {list_1['task1'][3]}\nTask 2: {list_1['task2'][0]} | Priority: {list_1['task2'][4]}\n -> {list_1['task2'][1]}\n -> {list_1['task2'][2]}\n -> {list_1['task2'][3]}\nTask 3: {list_1['task3'][0]} | Priority: {list_1['task3'][4]}\n -> {list_1['task3'][1]}\n -> {list_1['task3'][2]}\n -> {list_1['task3'][3]}\nTask 4: {list_1['task4'][0]} | Priority: {list_1['task4'][4]}\n -> {list_1['task4'][1]}\n -> {list_1['task4'][2]}\n -> {list_1['task4'][3]}\nTask 5: {list_1['task5'][0]} | Priority: {list_1['task5'][4]}\n -> {list_1['task5'][1]}\n -> {list_1['task5'][2]}\n -> {list_1['task5'][3]}\n"
+    print_task_l2 = f"\nTask 1: {list_2['task1'][0]} | Priority: {list_2['task1'][4]}\n -> {list_2['task1'][1]}\n -> {list_2['task1'][2]}\n -> {list_2['task1'][3]}\nTask 2: {list_2['task2'][0]} | Priority: {list_2['task2'][4]}\n -> {list_2['task2'][1]}\n -> {list_2['task2'][2]}\n -> {list_2['task2'][3]}\nTask 3: {list_2['task3'][0]} | Priority: {list_2['task3'][4]}\n -> {list_2['task3'][1]}\n -> {list_2['task3'][2]}\n -> {list_2['task3'][3]}\nTask 4: {list_2['task4'][0]} | Priority: {list_2['task4'][4]}\n -> {list_2['task4'][1]}\n -> {list_2['task4'][2]}\n -> {list_2['task4'][3]}\nTask 5: {list_2['task5'][0]} | Priority: {list_2['task5'][4]}\n -> {list_2['task5'][1]}\n -> {list_2['task5'][2]}\n -> {list_2['task5'][3]}\n"
+    print_task_l3 = f"\nTask 1: {list_3['task1'][0]} | Priority: {list_3['task1'][4]}\n -> {list_3['task1'][1]}\n -> {list_3['task1'][2]}\n -> {list_3['task1'][3]}\nTask 2: {list_3['task2'][0]} | Priority: {list_3['task2'][4]}\n -> {list_3['task2'][1]}\n -> {list_3['task2'][2]}\n -> {list_3['task2'][3]}\nTask 3: {list_3['task3'][0]} | Priority: {list_3['task3'][4]}\n -> {list_3['task3'][1]}\n -> {list_3['task3'][2]}\n -> {list_3['task3'][3]}\nTask 4: {list_3['task4'][0]} | Priority: {list_3['task4'][4]}\n -> {list_3['task4'][1]}\n -> {list_3['task4'][2]}\n -> {list_3['task4'][3]}\nTask 5: {list_3['task5'][0]} | Priority: {list_3['task5'][4]}\n -> {list_3['task5'][1]}\n -> {list_3['task5'][2]}\n -> {list_3['task5'][3]}\n"
 
 
 def list_select():  # Allows the user to select a list
@@ -84,7 +84,7 @@ def subtask_select():
 
 # Startup
 print("To-Do List GNU General Public License 3.0 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.")  # Prints the GNU Public License 3.0
-print("Build Version: 1.7 Pre Build 3\n\n")  # Prints the build version
+print("Build Version: 1.7 Pre Build 4\n\n")  # Prints the build version
 
 # Greet
 print("~~~ MY TO-DO LIST ~~~")
@@ -93,7 +93,7 @@ print("~~~ MY TO-DO LIST ~~~")
 while True:  # Infinite loop
 
     operation_tree = input(
-        "\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Rename\n(4) View\nTo exit press 0\n\n")  # Asks the user to select an operation
+        "\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Edit\n(4) View\nTo exit press 0\n\n")  # Asks the user to select an operation
 
     if operation_tree == "0":  # User exiting
         break
@@ -134,37 +134,37 @@ while True:  # Infinite loop
             if list_chosen["task1"][0] == "":  # Checking a non-occupied task to create the new one
 
                 list_chosen["task1"][0] = input("\nEnter your task: ")
-                print("\nTask created successfully!")
+                print("\nTask created successfully!\n")
 
-                list_chosen["task1"][4] = input("Enter a due date [DD/MM HH:MM]: ")
+                list_chosen["task1"][4] = input("Enter the priority of the task (1-3): ")
 
             elif list_chosen["task2"][0] == "":
 
                 list_chosen["task2"][0] = input("\nEnter your task: ")
-                print("\nTask created successfully!")
+                print("\nTask created successfully!\n")
 
-                list_chosen["task2"][4] = input("Enter a due date: ")
+                list_chosen["task2"][4] = input("Enter the priority of the task (1-3): ")
 
             elif list_chosen["task3"][0] == "":
 
                 list_chosen["task3"][0] = input("\nEnter your task: ")
-                print("\nTask created successfully!")
+                print("\nTask created successfully!\n")
 
-                list_chosen["task3"][4] = input("Enter a due date: ")
+                list_chosen["task3"][4] = input("Enter the priority of the task (1-3): ")
 
             elif list_chosen["task4"][0] == "":
 
                 list_chosen["task4"][0] = input("\nEnter your task: ")
-                print("\nTask created successfully!")
+                print("\nTask created successfully!\n")
 
-                list_chosen["task4"][4] = input("Enter a due date: ")
+                list_chosen["task4"][4] = input("Enter the priority of the task (1-3): ")
 
             elif list_chosen["task5"][0] == "":
 
                 list_chosen["task5"][0] = input("\nEnter your task: ")
-                print("\nTask created successfully!")
+                print("\nTask created successfully!\n")
 
-                list_chosen["task5"][4] = input("Enter a due date: ")
+                list_chosen["task5"][4] = input("Enter the priority of the task (1-3): ")
 
             else:
 
@@ -273,7 +273,7 @@ while True:  # Infinite loop
 
     if operation_tree == "3":  # User editing a list or a task
 
-        operation = input("\n -> (1) Rename a list\n -> (2) Rename a task\n\n")
+        operation = input("\n -> (1) Rename a list\n -> (2) Rename a task\n -> (3) Edit a task's priority\n\n")
 
         # Rename a list
         if operation == "1":
@@ -305,6 +305,17 @@ while True:  # Infinite loop
             print("Renamed the task successfully!")
 
             refresh_pr_list()
+
+        # Add priority to a task
+        if operation == "3":
+
+            task_select()
+
+            list_chosen[task_chosen][4] = input("Edit the priority of the task (1-3): ") # Adding priority to the task
+
+            refresh_pr_list()
+
+            print("\nEdited priority to the task successfully!")
 
     if operation_tree == "4":  # User viewing a list
 
