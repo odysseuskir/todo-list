@@ -1,17 +1,17 @@
 """
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.7 Pre Build 4
+Version: 1.7 Pre Build 5
 """
 
-list_1 = {"task1": ["", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
-          "task5": ["", "", "", "", ""]}  # Lists storing the tasks
+list_1 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+          "task5": ["", "", "", "", "", ""]}  # Lists storing the tasks
 list_1_name = None  # The list's name
-list_2 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
-          "task5": ["", "", "", "", ""]}
+list_2 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+          "task5": ["", "", "", "", "", ""]}
 list_2_name = None
-list_3 = {"task1": ["", "", "", "", ""], "task2": ["", "", "", "", ""], "task3": ["", "", "", "", ""], "task4": ["", "", "", "", ""],
-          "task5": ["", "", "", "", ""]}
+list_3 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+          "task5": ["", "", "", "", "", ""]}
 list_3_name = None
 operation_tree = None # The selected operation parent from the user (Example: Delete is the parent of delete a task or a list)
 operation = None  # The selected operation from the user
@@ -26,9 +26,9 @@ def refresh_pr_list():  # Refreshes the list of tasks
     global print_task_l2
     global print_task_l3
 
-    print_task_l1 = f"\nTask 1: {list_1['task1'][0]} | Priority: {list_1['task1'][4]}\n -> {list_1['task1'][1]}\n -> {list_1['task1'][2]}\n -> {list_1['task1'][3]}\nTask 2: {list_1['task2'][0]} | Priority: {list_1['task2'][4]}\n -> {list_1['task2'][1]}\n -> {list_1['task2'][2]}\n -> {list_1['task2'][3]}\nTask 3: {list_1['task3'][0]} | Priority: {list_1['task3'][4]}\n -> {list_1['task3'][1]}\n -> {list_1['task3'][2]}\n -> {list_1['task3'][3]}\nTask 4: {list_1['task4'][0]} | Priority: {list_1['task4'][4]}\n -> {list_1['task4'][1]}\n -> {list_1['task4'][2]}\n -> {list_1['task4'][3]}\nTask 5: {list_1['task5'][0]} | Priority: {list_1['task5'][4]}\n -> {list_1['task5'][1]}\n -> {list_1['task5'][2]}\n -> {list_1['task5'][3]}\n"
-    print_task_l2 = f"\nTask 1: {list_2['task1'][0]} | Priority: {list_2['task1'][4]}\n -> {list_2['task1'][1]}\n -> {list_2['task1'][2]}\n -> {list_2['task1'][3]}\nTask 2: {list_2['task2'][0]} | Priority: {list_2['task2'][4]}\n -> {list_2['task2'][1]}\n -> {list_2['task2'][2]}\n -> {list_2['task2'][3]}\nTask 3: {list_2['task3'][0]} | Priority: {list_2['task3'][4]}\n -> {list_2['task3'][1]}\n -> {list_2['task3'][2]}\n -> {list_2['task3'][3]}\nTask 4: {list_2['task4'][0]} | Priority: {list_2['task4'][4]}\n -> {list_2['task4'][1]}\n -> {list_2['task4'][2]}\n -> {list_2['task4'][3]}\nTask 5: {list_2['task5'][0]} | Priority: {list_2['task5'][4]}\n -> {list_2['task5'][1]}\n -> {list_2['task5'][2]}\n -> {list_2['task5'][3]}\n"
-    print_task_l3 = f"\nTask 1: {list_3['task1'][0]} | Priority: {list_3['task1'][4]}\n -> {list_3['task1'][1]}\n -> {list_3['task1'][2]}\n -> {list_3['task1'][3]}\nTask 2: {list_3['task2'][0]} | Priority: {list_3['task2'][4]}\n -> {list_3['task2'][1]}\n -> {list_3['task2'][2]}\n -> {list_3['task2'][3]}\nTask 3: {list_3['task3'][0]} | Priority: {list_3['task3'][4]}\n -> {list_3['task3'][1]}\n -> {list_3['task3'][2]}\n -> {list_3['task3'][3]}\nTask 4: {list_3['task4'][0]} | Priority: {list_3['task4'][4]}\n -> {list_3['task4'][1]}\n -> {list_3['task4'][2]}\n -> {list_3['task4'][3]}\nTask 5: {list_3['task5'][0]} | Priority: {list_3['task5'][4]}\n -> {list_3['task5'][1]}\n -> {list_3['task5'][2]}\n -> {list_3['task5'][3]}\n"
+    print_task_l1 = f"\nTask 1: {list_1['task1'][0]} | Priority: {list_1['task1'][4]} | Due date: {list_1['task1'][5]}\n -> {list_1['task1'][1]}\n -> {list_1['task1'][2]}\n -> {list_1['task1'][3]}\nTask 2: {list_1['task2'][0]} | Priority: {list_1['task2'][4]} | Due date: {list_1['task2'][5]}\n -> {list_1['task2'][1]}\n -> {list_1['task2'][2]}\n -> {list_1['task2'][3]}\nTask 3: {list_1['task3'][0]} | Priority: {list_1['task3'][4]} | Due date: {list_1['task3'][5]}\n -> {list_1['task3'][1]}\n -> {list_1['task3'][2]}\n -> {list_1['task3'][3]}\nTask 4: {list_1['task4'][0]} | Priority: {list_1['task4'][4]} | Due date: {list_1['task4'][5]}\n -> {list_1['task4'][1]}\n -> {list_1['task4'][2]}\n -> {list_1['task4'][3]}\nTask 5: {list_1['task5'][0]} | Priority: {list_1['task5'][4]} | Due date: {list_1['task5'][5]}\n -> {list_1['task5'][1]}\n -> {list_1['task5'][2]}\n -> {list_1['task5'][3]}\n"
+    print_task_l2 = f"\nTask 1: {list_2['task1'][0]} | Priority: {list_2['task1'][4]} | Due date: {list_2['task1'][5]}\n -> {list_2['task1'][1]}\n -> {list_2['task1'][2]}\n -> {list_2['task1'][3]}\nTask 2: {list_2['task2'][0]} | Priority: {list_2['task2'][4]} | Due date: {list_2['task2'][5]}\n -> {list_2['task2'][1]}\n -> {list_2['task2'][2]}\n -> {list_2['task2'][3]}\nTask 3: {list_2['task3'][0]} | Priority: {list_2['task3'][4]} | Due date: {list_2['task3'][5]}\n -> {list_2['task3'][1]}\n -> {list_2['task3'][2]}\n -> {list_2['task3'][3]}\nTask 4: {list_2['task4'][0]} | Priority: {list_2['task4'][4]} | Due date: {list_2['task4'][5]}\n -> {list_2['task4'][1]}\n -> {list_2['task4'][2]}\n -> {list_2['task4'][3]}\nTask 5: {list_2['task5'][0]} | Priority: {list_2['task5'][4]} | Due date: {list_2['task5'][5]}\n -> {list_2['task5'][1]}\n -> {list_2['task5'][2]}\n -> {list_2['task5'][3]}\n"
+    print_task_l3 = f"\nTask 1: {list_3['task1'][0]} | Priority: {list_3['task1'][4]} | Due date: {list_3['task1'][5]}\n -> {list_3['task1'][1]}\n -> {list_3['task1'][2]}\n -> {list_3['task1'][3]}\nTask 2: {list_3['task2'][0]} | Priority: {list_3['task2'][4]} | Due date: {list_3['task2'][5]}\n -> {list_3['task2'][1]}\n -> {list_3['task2'][2]}\n -> {list_3['task2'][3]}\nTask 3: {list_3['task3'][0]} | Priority: {list_3['task3'][4]} | Due date: {list_3['task3'][5]}\n -> {list_3['task3'][1]}\n -> {list_3['task3'][2]}\n -> {list_3['task3'][3]}\nTask 4: {list_3['task4'][0]} | Priority: {list_3['task4'][4]} | Due date: {list_3['task4'][5]}\n -> {list_3['task4'][1]}\n -> {list_3['task4'][2]}\n -> {list_3['task4'][3]}\nTask 5: {list_3['task5'][0]} | Priority: {list_3['task5'][4]} | Due date: {list_3['task5'][5]}\n -> {list_3['task5'][1]}\n -> {list_3['task5'][2]}\n -> {list_3['task5'][3]}\n"
 
 
 def list_select():  # Allows the user to select a list
@@ -137,6 +137,7 @@ while True:  # Infinite loop
                 print("\nTask created successfully!\n")
 
                 list_chosen["task1"][4] = input("Enter the priority of the task (1-3): ")
+                list_chosen["task1"][5] = input("Enter the due date for the task (DD/MM/YYYY): ")
 
             elif list_chosen["task2"][0] == "":
 
@@ -144,6 +145,7 @@ while True:  # Infinite loop
                 print("\nTask created successfully!\n")
 
                 list_chosen["task2"][4] = input("Enter the priority of the task (1-3): ")
+                list_chosen["task2"][5] = input("Enter the due date for the task (DD/MM/YYYY): ")
 
             elif list_chosen["task3"][0] == "":
 
@@ -151,6 +153,7 @@ while True:  # Infinite loop
                 print("\nTask created successfully!\n")
 
                 list_chosen["task3"][4] = input("Enter the priority of the task (1-3): ")
+                list_chosen["task3"][5] = input("Enter the due date for the task (DD/MM/YYYY): ")
 
             elif list_chosen["task4"][0] == "":
 
@@ -158,6 +161,7 @@ while True:  # Infinite loop
                 print("\nTask created successfully!\n")
 
                 list_chosen["task4"][4] = input("Enter the priority of the task (1-3): ")
+                list_chosen["task4"][5] = input("Enter the due date for the task (DD/MM/YYYY): ")
 
             elif list_chosen["task5"][0] == "":
 
@@ -165,6 +169,7 @@ while True:  # Infinite loop
                 print("\nTask created successfully!\n")
 
                 list_chosen["task5"][4] = input("Enter the priority of the task (1-3): ")
+                list_chosen["task5"][5] = input("Enter the due date for the task (DD/MM/YYYY): ")
 
             else:
 
@@ -233,9 +238,8 @@ while True:  # Infinite loop
                 list_3_name = None  # Setting the name of the third list to None
                 list_1 = list_2  # Moving the second list to the first one
                 list_2 = list_3  # Moving the third list to the second one
-                list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
-                          "task4": ["", "", "", ""],
-                          "task5": ["", "", "", ""]}  # Setting the third list to a default one
+                list_3 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+                "task5": ["", "", "", "", "", ""]}
                 print("List deleted successfully!")
 
             elif list_chosen == list_2:
@@ -243,15 +247,15 @@ while True:  # Infinite loop
                 list_2_name = list_3_name
                 list_3_name = None
                 list_2 = list_3
-                list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
-                          "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
+                list_3 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+                "task5": ["", "", "", "", "", ""]}
                 print("List deleted successfully!")
 
             elif list_chosen == list_3:
 
                 list_3_name = None
-                list_3 = {"task1": ["", "", "", ""], "task2": ["", "", "", ""], "task3": ["", "", "", ""],
-                          "task4": ["", "", "", ""], "task5": ["", "", "", ""]}
+                list_3 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
+                "task5": ["", "", "", "", "", ""]}
                 print("List deleted successfully!")
 
             else:
@@ -335,4 +339,4 @@ while True:  # Infinite loop
 
 exit_key = input()  # Exiting the program
 
-# This program is protected by the GNU General Public License v3.0 | ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | SOME RIGHTS RESERVED
+# This program is protected by the GNU General Public License v3.0 | ODYSSEUS-ABRAHAM KIRIKOPOULOS | SOME RIGHTS RESERVED
