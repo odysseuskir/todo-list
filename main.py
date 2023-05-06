@@ -1,7 +1,7 @@
 """
 Authors: Odysseus-Abraham Kirikopoulos
 This script is protected by the GNU Public License 3.0. Refer source as "Odysseus-Abraham Kirikopoulos" when distributing the software.
-Version: 1.7 Pre Build 5
+Version: 1.7
 """
 
 list_1 = {"task1": ["", "", "", "", "", ""], "task2": ["", "", "", "", "", ""], "task3": ["", "", "", "", "", ""], "task4": ["", "", "", "", "", ""],
@@ -72,7 +72,8 @@ def task_select():  # Allows the user to select a task
         print("Err:ListNotFound")
 
 
-def subtask_select():
+def subtask_select(): # Allows the user to select a subtask
+
     global subtask_chosen
 
     task_select()
@@ -84,7 +85,7 @@ def subtask_select():
 
 # Startup
 print("To-Do List GNU General Public License 3.0 2022 Odysseus-Abraham Kirikopoulos\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under certain conditions.")  # Prints the GNU Public License 3.0
-print("Build Version: 1.7 Pre Build 4\n\n")  # Prints the build version
+print("Build Version: 1.7\n\n")  # Prints the build version
 
 # Greet
 print("~~~ MY TO-DO LIST ~~~")
@@ -92,8 +93,7 @@ print("~~~ MY TO-DO LIST ~~~")
 # Operations
 while True:  # Infinite loop
 
-    operation_tree = input(
-        "\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Edit\n(4) View\nTo exit press 0\n\n")  # Asks the user to select an operation
+    operation_tree = input("\nSelect the type of operation:\n(1) Create\n(2) Delete/Check off\n(3) Edit\n(4) View\nTo exit press 0\n\n")  # Asks the user to select an operation
 
     if operation_tree == "0":  # User exiting
         break
@@ -119,8 +119,7 @@ while True:  # Infinite loop
                 list_3_name = input("\nName your new list: ")
                 print(f"{list_3_name} created")
 
-            elif (
-                    list_1_name and list_2_name and list_3_name != None):  # In case there are 3 lists, no more can be created
+            elif (list_1_name and list_2_name and list_3_name != None):  # In case there are 3 lists, no more can be created
 
                 print("Err:MaxListsReached")
 
@@ -205,8 +204,7 @@ while True:  # Infinite loop
 
     if operation_tree == "2":  # User deleting/checking off a list or a (sub)task
 
-        operation = input(
-            "\n -> (1) Check off a task\n -> (2) Check off a subtask\n -> (3) Delete a list\n -> (4) Delete a task\n\n")
+        operation = input("\n -> (1) Check off a task\n -> (2) Check off a subtask\n -> (3) Delete a list\n -> (4) Delete a task\n\n")
 
         # Check off a task
         if operation == "1":
